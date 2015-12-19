@@ -1,0 +1,34 @@
+-cp src
+
+--each
+
+#works
+-main Single
+-neko bin/test.a.n
+
+--next
+
+#works
+-main Single
+--remap a:c
+-neko bin/test.c.n
+
+--next
+
+#works
+-main Double
+-neko bin/test.ab.n
+
+--next
+
+#compiles, but returns wrong value.
+-main Double
+--remap a.b:c.d
+-neko bin/test.cd.n
+
+--next
+
+#fails to compile, `Type not found: a.Foo`.
+-main Single
+--remap a:c.d
+-neko bin/test.cd2.n
